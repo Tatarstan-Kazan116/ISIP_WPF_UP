@@ -1,0 +1,122 @@
+﻿<Page x:Class="UP_NEW.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Администрирование">
+    <TabControl Margin="10">
+        <TabItem Header="Жалобы">
+            <DataGrid x:Name="DgComplaints" AutoGenerateColumns="False" Margin="5" 
+                      IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Отправитель" Binding="{Binding Sender}" Width="*"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding TargetType}" Width="100"/>
+                    <DataGridTextColumn Header="Причина" Binding="{Binding Reason}" Width="2*"/>
+                    <DataGridTemplateColumn Header="Действия" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="✅ Принять" 
+                                            Click="AcceptComplaint_Click" 
+                                            Tag="{Binding ComplaintID}"
+                                            Margin="0,0,5,0"
+                                            Padding="5,2"/>
+                                    <Button Content="❌ Отклонить" 
+                                            Click="RejectComplaint_Click" 
+                                            Tag="{Binding ComplaintID}"
+                                            Padding="5,2"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+
+        <TabItem Header="Заявки на разморозку">
+            <DataGrid x:Name="DgUnfreezeRequests" AutoGenerateColumns="False" Margin="5" 
+              IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Пользователь" Binding="{Binding UserName}" Width="*"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding TargetType}" Width="100"/>
+                    <DataGridTextColumn Header="Объект" Binding="{Binding TargetName}" Width="*"/>
+                    <DataGridTextColumn Header="Причина" Binding="{Binding Reason}" Width="2*"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding RequestDate}" Width="150"/>
+                    <DataGridTemplateColumn Header="Действия" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="✅ Разморозить" 
+                                    Click="ApproveUnfreeze_Click" 
+                                    Tag="{Binding RequestID}"
+                                    Margin="0,0,5,0"
+                                    Padding="5,2"/>
+                                    <Button Content="❌ Отклонить" 
+                                    Click="RejectUnfreeze_Click" 
+                                    Tag="{Binding RequestID}"
+                                    Padding="5,2"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        
+        <TabItem Header="Заявки на роль">
+            <DataGrid x:Name="DgRoleRequests" AutoGenerateColumns="False" Margin="5" 
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Пользователь" Binding="{Binding DisplayName}" Width="*"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding RequestDate}" Width="150"/>
+                    <DataGridTemplateColumn Header="Действия" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="✅ Утвердить" 
+                                            Click="ApproveRole_Click" 
+                                            Tag="{Binding RequestID}"
+                                            Margin="0,0,5,0"
+                                            Padding="5,2"/>
+                                    <Button Content="❌ Отклонить" 
+                                            Click="RejectRole_Click" 
+                                            Tag="{Binding RequestID}"
+                                            Padding="5,2"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+
+        <TabItem Header="Пользователи">
+            <DataGrid x:Name="DgUsers" AutoGenerateColumns="False" Margin="5" 
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
+                    <DataGridTextColumn Header="Роль" Binding="{Binding RoleName}" Width="150"/>
+                    <DataGridTemplateColumn Header="Действия" Width="250">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ComboBox x:Name="CbRole" 
+                                              Width="80" 
+                                              Margin="0,0,5,0"
+                                              Tag="{Binding UserID}"
+                                              SelectionChanged="ChangeRole_Click">
+                                        <ComboBoxItem Content="1" Tag="1"/>
+                                        <ComboBoxItem Content="2" Tag="2"/>
+                                        <ComboBoxItem Content="3" Tag="3"/>
+                                    </ComboBox>
+                                    <Button Content="🔒 Заморозить" 
+                                            Click="FreezeUser_Click" 
+                                            Tag="{Binding UserID}"
+                                            Padding="5,2"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+    </TabControl>
+</Page>

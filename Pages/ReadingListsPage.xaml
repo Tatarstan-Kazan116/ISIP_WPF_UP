@@ -1,0 +1,42 @@
+﻿<Page x:Class="UP_NEW.Pages.ReadingListsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Списки чтения">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ТАБЫ -->
+        <TabControl x:Name="TcLists" Grid.Row="0" SelectionChanged="TcLists_SelectionChanged">
+            <TabItem Header="В планах"/>
+            <TabItem Header="Читаю"/>
+            <TabItem Header="Прочитано"/>
+            <TabItem Header="Заброшено"/>
+        </TabControl>
+
+        <!-- СЕТКА -->
+        <DataGrid x:Name="DgLists" Grid.Row="1" AutoGenerateColumns="False" 
+                  Margin="0,10,0,0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Книга" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="150"/>
+                <DataGridTemplateColumn Header="Изменить статус" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectionChanged="ChangeStatus_Click" 
+                                      Tag="{Binding BookID}"
+                                      SelectedValue="{Binding Status, Mode=OneWay}">
+                                <ComboBoxItem Content="В планах"/>
+                                <ComboBoxItem Content="Читаю"/>
+                                <ComboBoxItem Content="Прочитано"/>
+                                <ComboBoxItem Content="Заброшено"/>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

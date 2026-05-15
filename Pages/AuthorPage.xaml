@@ -1,0 +1,33 @@
+﻿<Page x:Class="UP_NEW.Pages.AuthorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Кабинет автора">
+    <StackPanel Margin="15">
+        <GroupBox Header="Добавить новую книгу" Padding="10" Margin="0,0,0,15">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="TxtNewTitle" Width="200" Margin="0,0,5,0" Text="Название книги"/>
+                <TextBox x:Name="TxtNewContent" Width="300" Margin="0,0,5,0" Text="Текст книги"/>
+                <Button Content="➕ Опубликовать" Click="AddNewBook_Click"/>
+            </StackPanel>
+        </GroupBox>
+
+        <TextBlock Text="Мои книги:" FontWeight="Bold"/>
+        <DataGrid x:Name="DgMyBooks" AutoGenerateColumns="False" Margin="0,0,0,15" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="100"/>
+                <DataGridTemplateColumn Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="TxtEditContent" Width="150" Margin="0,0,5,0" Visibility="{Binding ShowEditBox}"/>
+                                <Button Content="✏️ Сохранить" Click="EditBook_Click" Tag="{Binding BookID}" Visibility="{Binding ShowEditBox}"/>
+                                <Button Content="❄️ Оспорить заморозку" Click="AppealBookFreeze_Click" Tag="{Binding BookID}" Visibility="{Binding ShowAppeal}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Page>

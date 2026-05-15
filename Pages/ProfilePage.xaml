@@ -1,0 +1,24 @@
+﻿<Page x:Class="UP_NEW.Pages.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Профиль">
+    <StackPanel Margin="20">
+        <TextBlock x:Name="TbInfo" FontSize="16" Margin="0,0,0,15"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox x:Name="TxtRoleReason" Width="200" Margin="0,0,5,0"/>
+            <Button Content="📝 Заявка на роль Автора" Click="RequestRole_Click"/>
+        </StackPanel>
+
+        <TextBlock x:Name="TbFreezeWarn" Foreground="Red" FontWeight="Bold" Visibility="Collapsed" Margin="0,0,0,10"/>
+
+        <!-- ДОБАВЛЕНО: Панель оспаривания -->
+        <StackPanel x:Name="PnlAppeal" Orientation="Horizontal" Visibility="Collapsed" Margin="0,0,0,10">
+            <TextBox x:Name="TxtAppealReason" Width="200" Margin="0,0,5,0"/>
+            <Button Content="❄️ Оспорить заморозку" Click="AppealFreeze_Click"/>
+        </StackPanel>
+
+        <TextBlock Text="Мои отзывы:" FontWeight="Bold" Margin="0,15,0,5"/>
+        <DataGrid x:Name="DgMyReviews" AutoGenerateColumns="True" Height="150" IsReadOnly="True"/>
+    </StackPanel>
+</Page>
