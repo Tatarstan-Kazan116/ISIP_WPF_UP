@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41fdd8aa383f46d89d63ebc0ab68f905" Name="Diagram1">
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.Books" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.Complaints" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.Genres" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.ReadingLists" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.Reviews" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.RoleRequests" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.Roles" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.UnfreezeRequests" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_RW_SirazievModel.Users" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__Books__AuthorID__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__ReadingLi__BookI__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__Reviews__BookID__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__Complaint__UserI__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__ReadingLi__UserI__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__Reviews__UserID__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__RoleReque__UserI__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__Users__RoleID__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.FK__UnfreezeR__UserI__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_RW_SirazievModel.BookGenres" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
