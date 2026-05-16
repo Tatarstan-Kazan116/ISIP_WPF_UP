@@ -20,6 +20,22 @@
         <DataGrid x:Name="DgBooks" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" 
                   MouseDoubleClick="DgBooks_MouseDoubleClick" SelectionMode="Single">
             <DataGrid.Columns>
+                <!-- 🔥 НОВАЯ КОЛОНКА С ОБЛОЖКОЙ 🔥 -->
+                <DataGridTemplateColumn Header="Обложка" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" CornerRadius="3">
+                                <Image Source="{Binding CoverPath}" 
+                                       Width="70" 
+                                       Height="90" 
+                                       Stretch="Uniform"
+                                       StretchDirection="DownOnly"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- 🔥 КОНЕЦ КОЛОНКИ 🔥 -->
+
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="2*"/>
                 <DataGridTextColumn Header="Автор" Binding="{Binding Author}" Width="*"/>
                 <DataGridTextColumn Header="Жанры" Binding="{Binding Genres}" Width="*"/>
