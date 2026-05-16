@@ -1,4 +1,4 @@
-﻿<Page x:Class="UP_NEW.Pages.AdminPage"
+﻿<Page x:Class="UP_New.Pages.AdminPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Администрирование">
@@ -60,7 +60,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </TabItem>
-        
+
         <TabItem Header="Заявки на роль">
             <DataGrid x:Name="DgRoleRequests" AutoGenerateColumns="False" Margin="5" 
                       IsReadOnly="True">
