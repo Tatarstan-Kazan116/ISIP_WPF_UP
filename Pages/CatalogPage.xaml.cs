@@ -13,7 +13,7 @@ namespace UP_New.Pages
     {
         public int BookID { get; set; }
         public string Title { get; set; }
-        public string CoverPath { get; set; }
+        public System.Windows.Media.ImageSource CoverPath { get; set; }  // ← ImageSource вместо string!
         public string Author { get; set; }
         public string Genres { get; set; }
         public double AvgRating { get; set; }
@@ -40,23 +40,53 @@ namespace UP_New.Pages
 
         private void LoadBooks()
         {
-            // СНАЧАЛА загружаем данные из БД в память
             var booksList = Core.Context.Books
                 .Where(b => b.IsFrozen == false)
                 .Include(b => b.Users)
                 .Include(b => b.Genres)
                 .Include(b => b.Reviews)
-                .ToList(); // ← Материализуем здесь!
+                .ToList();
 
-            // ПОТОМ делаем проекцию с string.Join (уже в памяти)
-            var data = booksList.Select(b => new BookDisplay
+            var data = booksList.Select(b =>
             {
-                BookID = b.BookID,
-                Title = b.Title,
-                CoverPath = b.CoverPath,
-                Author = b.Users != null ? b.Users.DisplayName : "Неизвестно",
-                Genres = string.Join(", ", b.Genres.Select(g => g.GenreName)), // Теперь работает!
-                AvgRating = b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) : 0.0
+                // Формируем полный путь к картинке
+                string relativePath = b.CoverPath?.TrimStart('/', '\\') ?? $"Covers/{b.BookID}.jpg";
+                string fullPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+
+                // Создаём BitmapImage
+                System.Windows.Media.ImageSource imageSource = null;
+
+                if (System.IO.File.Exists(fullPath))
+                {
+                    try
+                    {
+                        var bitmap = new System.Windows.Media.Imaging.BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(fullPath);
+                        bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                        bitmap.Freeze(); // Делаем доступным для любого потока
+                        imageSource = bitmap;
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Ошибка загрузки картинки {fullPath}: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"Картинка не найдена: {fullPath}");
+                }
+
+                return new BookDisplay
+                {
+                    BookID = b.BookID,
+                    Title = b.Title,
+                    CoverPath = imageSource,  // ← Передаём BitmapImage
+                    Author = b.Users != null ? b.Users.DisplayName : "Неизвестно",
+                    Genres = string.Join(", ", b.Genres.Select(g => g.GenreName)),
+                    AvgRating = b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) : 0.0
+                };
             }).ToList();
 
             _cvs = new CollectionViewSource { Source = data };
